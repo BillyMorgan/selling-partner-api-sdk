@@ -290,7 +290,19 @@ func (c *Client) CreateFeed(ctx context.Context, body CreateFeedJSONRequestBody)
 			return nil, err
 		}
 	}
-	return c.Client.Do(req)
+
+	rsp, err := c.Client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	if c.ResponseAfter != nil {
+		err = c.ResponseAfter(ctx, rsp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return rsp, nil
 }
 
 func (c *Client) CancelFeed(ctx context.Context, feedId string) (*http.Response, error) {
