@@ -383,7 +383,7 @@ func NewCreateFeedDocumentRequestWithBody(endpoint string, contentType string, b
 		return nil, err
 	}
 
-	basePath := fmt.Sprintf("/feeds/2020-09-04/documents")
+	basePath := fmt.Sprintf("/feeds/2021-06-30/documents")
 	if basePath[0] == '/' {
 		basePath = basePath[1:]
 	}
@@ -418,7 +418,7 @@ func NewGetFeedDocumentRequest(endpoint string, feedDocumentId string) (*http.Re
 		return nil, err
 	}
 
-	basePath := fmt.Sprintf("/feeds/2020-09-04/documents/%s", pathParam0)
+	basePath := fmt.Sprintf("/feeds/2021-06-30/documents/%s", pathParam0)
 	if basePath[0] == '/' {
 		basePath = basePath[1:]
 	}
@@ -445,7 +445,7 @@ func NewGetFeedsRequest(endpoint string, params *GetFeedsParams) (*http.Request,
 		return nil, err
 	}
 
-	basePath := fmt.Sprintf("/feeds/2020-09-04/feeds")
+	basePath := fmt.Sprintf("/feeds/2021-06-30/feeds")
 	if basePath[0] == '/' {
 		basePath = basePath[1:]
 	}
@@ -599,7 +599,7 @@ func NewCreateFeedRequestWithBody(endpoint string, contentType string, body io.R
 		return nil, err
 	}
 
-	basePath := fmt.Sprintf("/feeds/2020-09-04/feeds")
+	basePath := fmt.Sprintf("/feeds/2021-06-30/feeds")
 	if basePath[0] == '/' {
 		basePath = basePath[1:]
 	}
@@ -634,7 +634,7 @@ func NewCancelFeedRequest(endpoint string, feedId string) (*http.Request, error)
 		return nil, err
 	}
 
-	basePath := fmt.Sprintf("/feeds/2020-09-04/feeds/%s", pathParam0)
+	basePath := fmt.Sprintf("/feeds/2021-06-30/feeds/%s", pathParam0)
 	if basePath[0] == '/' {
 		basePath = basePath[1:]
 	}
@@ -668,7 +668,7 @@ func NewGetFeedRequest(endpoint string, feedId string) (*http.Request, error) {
 		return nil, err
 	}
 
-	basePath := fmt.Sprintf("/feeds/2020-09-04/feeds/%s", pathParam0)
+	basePath := fmt.Sprintf("/feeds/2021-06-30/feeds/%s", pathParam0)
 	if basePath[0] == '/' {
 		basePath = basePath[1:]
 	}
@@ -851,7 +851,7 @@ func (r CancelFeedResp) StatusCode() int {
 type GetFeedResp struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	Model        *GetFeedResponse
+	Model        *Feed
 }
 
 // Status returns HTTPResponse.Status
@@ -1088,7 +1088,7 @@ func ParseGetFeedResp(rsp *http.Response) (*GetFeedResp, error) {
 		HTTPResponse: rsp,
 	}
 
-	var dest GetFeedResponse
+	var dest Feed
 	if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 		return nil, err
 	}
